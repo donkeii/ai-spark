@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/dark_blue</item>
+    <item name="colorPrimaryDark">@color/black</item>
+    <item name="colorAccent">@color/gold</item>
+    <item name="android:windowBackground">@color/app_background</item>
+    <item name="android:statusBarColor">@color/black</item>
+</style>
+<style name="AppTheme.WithActionBar" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <item name="colorPrimary">@color/dark_blue</item>
+    <item name="colorPrimaryDark">@color/black</item>
+    <item name="colorAccent">@color/gold</item>
+    <item name="android:windowBackground">@color/app_background</item>
+    <item name="android:statusBarColor">@color/black</item>
+</style>
+</resources>
+

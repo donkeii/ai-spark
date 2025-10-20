@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_tarot"
+        android:icon="@drawable/ic_tarot"
+        android:title="@string/tab_tarot" />
+    <item
+        android:id="@+id/nav_horoscope"
+        android:icon="@drawable/ic_horoscope"
+        android:title="@string/tab_horoscope" />
+    <item
+        android:id="@+id/nav_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/tab_settings" />
+</menu>

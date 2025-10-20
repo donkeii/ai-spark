@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Bói Tarot</string>
+    <string name="tab_tarot">Tarot</string>
+    <string name="tab_horoscope">Horoscope</string>
+    <string name="tab_settings">Settings</string>
+
+    <string name="title_get_readings">Get your Tarot Readings</string>
+    <string name="title_discover_tarot">Discover Tarot</string>
+
+    <string name="get_tarot_reading">Đọc bài Tarot</string>
+    <string name="chat_tarot_reader">Cung Hoàng Đạo</string>
+    <string name="daily_card">Lập lá số tử vi</string>
+    <string name="yes_or_no">Inner Peace</string>
+    <string name="card_meanings">Card Meanings</string>
+    <string name="decks">Decks</string>
+    <string name="spreads_library">Spreads Library</string>
+    <string name="log_in">Log In</string>
+    <string name="save_progress">to Save Your Progress and never lose a reading again</string>
+    <string name="win_coins" />
+    <string name="buy_coins" />
+    <string name="earn_coins" />
+    <string name="spin_the_wheel" />
+    <string name="try_your_luck" />
+    <string name="progress_reading" />
+    <string name="gems_count" />
+    <string name="coins_count" />
+</resources>

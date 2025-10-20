@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_profile"
+        android:title="My profile" />
+
+    <item
+        android:id="@+id/menu_theme"
+        android:title="Theme">
+        <menu>
+            <item
+                android:id="@+id/menu_theme_dark"
+                android:title="Dark mode" />
+            <item
+                android:id="@+id/menu_theme_light"
+                android:title="Light mode" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menu_privacy"
+        android:title="Privacy Policy" />
+
+    <item
+        android:id="@+id/menu_version"
+        android:title="App version" />
+</menu>
+
+

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="dark_background">#1A1A1A</color>
+    <color name="card_background">#2A2A2A</color>
+    <color name="light_mint">#D4EDD4</color>
+    <color name="light_blue">#D4E8F5</color>
+    <color name="dark_blue">#1E3A5F</color>
+    <color name="navy_blue">#1A4B7C</color>
+    <color name="gold">#FFD700</color>
+    <color name="cyan">#00BCD4</color>
+    <color name="notification_red">#FF4444</color>
+    <!-- Theme-aware aliases -->
+    <color name="app_background">@color/white</color>
+    <color name="app_text_primary">@color/black</color>
+</resources>
+

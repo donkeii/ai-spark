@@ -6,6 +6,10 @@ android {
     namespace = "com.example.secret"
     compileSdk = 36
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         applicationId = "com.example.secret"
         minSdk = 26
@@ -14,6 +18,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "GEMINI_API_KEY", "\"${project.rootProject.file("local.properties").readText().lines().find { it.startsWith("GEMINI_API_KEY=") }?.substringAfter('=') ?: ""}\"")
     }
 
     buildTypes {
@@ -37,6 +42,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.recyclerview)
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
+    implementation(libs.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

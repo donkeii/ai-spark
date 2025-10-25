@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/app_background"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/hintClearMind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🧘 Hãy hít thở sâu, thả lỏng tâm trí, tập trung vào điều bạn muốn biết"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/hintTapDeck"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🃏 Hãy nhớ rằng lá bài này sẽ là một thông điệp từ vũ trụ dành riêng cho bạn vào ngày hôm nay"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp"/>
+
+    <TextView
+        android:id="@+id/hintAuto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✨ Khi bạn đã sẵn sàng, hãy nhẹ nhàng chạm vào lá bài. Đừng suy nghĩ quá nhiều, hãy để trực giác của bạn dẫn dắt. Đó là lá bài dành cho bạn"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp"/>
+
+    <ImageView
+        android:id="@+id/deckImage"
+        android:layout_width="260dp"
+        android:layout_height="380dp"
+        android:src="@drawable/ic_tarot"
+        android:scaleType="fitCenter"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="Deck"/>
+
+    <Button
+        android:id="@+id/btnInterpret"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_login_button"
+        android:text="Interpret"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
+</LinearLayout>
+
+

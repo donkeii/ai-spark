@@ -25,10 +25,30 @@
             android:theme="@style/AppTheme.WithActionBar"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".TarotShuffleActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ChatReaderActivity"
             android:exported="false"
             android:theme="@style/AppTheme.WithActionBar"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ZodiacResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".ChatReaderActivity" />
+        <activity
+            android:name=".ZodiacDetailActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".ZodiacResultActivity" />
+        <activity
+            android:name=".TarotInterpretActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".TarotShuffleActivity" />
         <activity
             android:name=".ProfileActivity"
             android:exported="false"

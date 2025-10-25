@@ -35,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(savedMode);
         setContentView(R.layout.activity_main);
 
-        // Tarot Reading Cards - sử dụng đúng ID từ layout
-        findViewById(R.id.cardTarotReading).setOnClickListener(v -> openFeature("Get Tarot Reading"));
+        // Tarot Reading Cards - mở màn hình shuffle mới
+        findViewById(R.id.cardTarotReading).setOnClickListener(v -> {
+            Intent i = new Intent(this, TarotShuffleActivity.class);
+            startActivity(i);
+        });
         findViewById(R.id.cardChatReader).setOnClickListener(v -> {
             Intent i = new Intent(this, ChatReaderActivity.class);
             startActivity(i);

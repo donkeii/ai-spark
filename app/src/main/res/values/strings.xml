@@ -24,4 +24,6 @@
     <string name="progress_reading" />
     <string name="gems_count" />
     <string name="coins_count" />
+    <string name="auto_shuffling_on">Auto Shuffling on</string>
+    <string name="auto_shuffling_off">Auto Shuffling off</string>
 </resources>

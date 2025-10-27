@@ -6,6 +6,46 @@
     android:orientation="vertical"
     android:background="@color/app_background">
 
+    <!-- Header with icon, zodiac name and date range -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:src="@mipmap/ic_launcher_round"
+            android:contentDescription="Zodiac icon" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+
+            <TextView
+                android:id="@+id/tvZodiacName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Song Tử"
+                android:textColor="@color/app_text_primary"
+                android:textStyle="bold"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/tvDateRange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="21 tháng Năm - 20 tháng Sáu"
+                android:textColor="#B3FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,7 +54,10 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/white"
+            app:tabIndicator="@drawable/tab_indicator_pill"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorGravity="center"
+            app:tabRippleColor="@android:color/transparent"
             app:tabTextColor="#B3FFFFFF"
             app:tabSelectedTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>

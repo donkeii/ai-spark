@@ -1,6 +1,7 @@
 package com.example.secret;
 
 import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ public class ChatReaderActivity extends AppCompatActivity {
     private TextView selectedName;
     private TextView selectedDate;
     private String selectedZodiac = "Aries";
+    private String selectedDateRange = "21 tháng Năm - 20 tháng Sáu";
     private GeminiClient geminiClient;
 
     @Override
@@ -26,34 +28,31 @@ public class ChatReaderActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(getString(R.string.chat_tarot_reader));
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        selectedIcon = findViewById(R.id.selectedIcon);
-        selectedName = findViewById(R.id.selectedName);
-        selectedDate = findViewById(R.id.selectedDate);
         geminiClient = new GeminiClient(BuildConfig.GEMINI_API_KEY);
 
-        wireZodiac(R.id.itemAquarius, "Aquarius", "Jan 20 - Feb 18");
-        wireZodiac(R.id.itemPisces, "Pisces", "Feb 19 - Mar 20");
-        wireZodiac(R.id.itemAries, "Aries", "Mar 21 - Apr 19");
-        wireZodiac(R.id.itemTaurus, "Taurus", "Apr 20 - May 20");
-        wireZodiac(R.id.itemGemini, "Gemini", "May 21 - Jun 20");
-        wireZodiac(R.id.itemCancer, "Cancer", "Jun 21 - Jul 22");
-        wireZodiac(R.id.itemLeo, "Leo", "Jul 23 - Aug 22");
-        wireZodiac(R.id.itemVirgo, "Virgo", "Aug 23 - Sep 22");
-        wireZodiac(R.id.itemLibra, "Libra", "Sep 23 - Oct 22");
-        wireZodiac(R.id.itemScorpio, "Scorpio", "Oct 23 - Nov 21");
-        wireZodiac(R.id.itemSagittarius, "Sagittarius", "Nov 22 - Dec 21");
-        wireZodiac(R.id.itemCapricorn, "Capricorn", "Dec 22 - Jan 19");
+        // Bind new header views
+        selectedIcon = findViewById(R.id.imgBadge);
+        selectedName = findViewById(R.id.txtZodiac);
+        selectedDate = findViewById(R.id.txtDateRange);
 
-        Button btnDaily = findViewById(R.id.btnDaily);
-        Button btnWeekly = findViewById(R.id.btnWeekly);
-        Button btnMonthly = findViewById(R.id.btnMonthly);
-        Button btnYearly = findViewById(R.id.btnYearly);
+        // Wire 12 zodiac tiles to update the header
+        wireZodiac(R.id.itemAries, "Bạch Dương", "21 tháng Ba - 19 tháng Tư");
+        wireZodiac(R.id.itemTaurus, "Kim Ngưu", "20 tháng Tư - 20 tháng Năm");
+        wireZodiac(R.id.itemGemini, "Song Tử", "21 tháng Năm - 20 tháng Sáu");
+        wireZodiac(R.id.itemCancer, "Cự Giải", "21 tháng Sáu - 22 tháng Bảy");
+        wireZodiac(R.id.itemLeo, "Sư Tử", "23 tháng Bảy - 22 tháng Tám");
+        wireZodiac(R.id.itemVirgo, "Xử Nữ", "23 tháng Tám - 22 tháng Chín");
+        wireZodiac(R.id.itemLibra, "Thiên Bình", "23 tháng Chín - 22 tháng Mười");
+        wireZodiac(R.id.itemScorpio, "Bọ Cạp", "23 tháng Mười - 21 tháng Mười một");
+        wireZodiac(R.id.itemSagittarius, "Nhân Mã", "22 tháng Mười một - 21 tháng Mười hai");
+        wireZodiac(R.id.itemCapricorn, "Ma Kết", "22 tháng Mười hai - 19 tháng Một");
+        wireZodiac(R.id.itemAquarius, "Bảo Bình", "20 tháng Một - 18 tháng Hai");
+        wireZodiac(R.id.itemPisces, "Song Ngư", "19 tháng Hai - 20 tháng Ba");
 
-        btnDaily.setOnClickListener(v -> runAstroPrompt(btnDaily, "daily"));
-        btnWeekly.setOnClickListener(v -> runAstroPrompt(btnWeekly, "weekly"));
-        btnMonthly.setOnClickListener(v -> runAstroPrompt(btnMonthly, "monthly"));
-        btnYearly.setOnClickListener(v -> runAstroPrompt(btnYearly, "yearly"));
+        Button btnInterpret = findViewById(R.id.btnInterpret);
+        if (btnInterpret != null) {
+            btnInterpret.setOnClickListener(v -> generateAllAndOpen(btnInterpret));
+        }
     }
 
     @Override
@@ -68,12 +67,13 @@ public class ChatReaderActivity extends AppCompatActivity {
         item.setOnClickListener(v -> selectZodiac(name, date));
     }
 
-    private void selectZodiac(String name, String date) {
-        selectedName.setText(name);
-        selectedDate.setText(date);
-        // Placeholder icon until individual zodiac icons are added
+    private void selectZodiac(String zodiacName, String dateRange) {
+        selectedName.setText(zodiacName);
+        selectedDate.setText(dateRange);
+        // Temporary emblem until per-zodiac icons are added
         selectedIcon.setImageResource(R.mipmap.ic_launcher_round);
-        selectedZodiac = name;
+        selectedZodiac = zodiacName;
+        selectedDateRange = dateRange;
     }
 
     private void runAstroPrompt(Button button, String predictionType) {
@@ -107,6 +107,109 @@ public class ChatReaderActivity extends AppCompatActivity {
                             .setMessage(message)
                             .setPositiveButton("OK", null)
                             .show();
+                });
+            }
+        });
+    }
+
+    private void generateAllAndOpen(Button trigger) {
+        trigger.setEnabled(false);
+        trigger.setText("Đang tạo...");
+
+        final String[] daily = {""};
+        final String[] weekly = {""};
+        final String[] monthly = {""};
+        final String[] yearly = {""};
+
+        geminiClient.generateAsync(getSystemPrompt("daily"), getUserPrompt("daily"), new GeminiClient.GeminiCallback() {
+            @Override
+            public void onSuccess(String text) {
+                daily[0] = text;
+                geminiClient.generateAsync(getSystemPrompt("weekly"), getUserPrompt("weekly"), new GeminiClient.GeminiCallback() {
+                    @Override
+                    public void onSuccess(String text) {
+                        weekly[0] = text;
+                        geminiClient.generateAsync(getSystemPrompt("monthly"), getUserPrompt("monthly"), new GeminiClient.GeminiCallback() {
+                            @Override
+                            public void onSuccess(String text) {
+                                monthly[0] = text;
+                                geminiClient.generateAsync(getSystemPrompt("yearly"), getUserPrompt("yearly"), new GeminiClient.GeminiCallback() {
+                                    @Override
+                                    public void onSuccess(String text) {
+                                        yearly[0] = text;
+                                        runOnUiThread(() -> {
+                                            trigger.setEnabled(true);
+                                            trigger.setText("Interpret");
+                                            Intent i = new Intent(ChatReaderActivity.this, ZodiacResultActivity.class);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_ZODIAC, selectedZodiac);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_DATE_RANGE, selectedDateRange);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_DAILY, daily[0]);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_WEEKLY, weekly[0]);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_MONTHLY, monthly[0]);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_YEARLY, yearly[0]);
+                                            startActivity(i);
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onError(String message) {
+                                        runOnUiThread(() -> {
+                                            trigger.setEnabled(true);
+                                            trigger.setText("Interpret");
+                                            Intent i = new Intent(ChatReaderActivity.this, ZodiacResultActivity.class);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_ZODIAC, selectedZodiac);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_DATE_RANGE, selectedDateRange);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_DAILY, daily[0]);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_WEEKLY, weekly[0]);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_MONTHLY, monthly[0]);
+                                            i.putExtra(ZodiacResultActivity.EXTRA_YEARLY, "");
+                                            startActivity(i);
+                                        });
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                runOnUiThread(() -> {
+                                    trigger.setEnabled(true);
+                                    trigger.setText("Interpret");
+                                    Intent i = new Intent(ChatReaderActivity.this, ZodiacResultActivity.class);
+                                    i.putExtra(ZodiacResultActivity.EXTRA_ZODIAC, selectedZodiac);
+                                    i.putExtra(ZodiacResultActivity.EXTRA_DATE_RANGE, selectedDateRange);
+                                    i.putExtra(ZodiacResultActivity.EXTRA_DAILY, daily[0]);
+                                    i.putExtra(ZodiacResultActivity.EXTRA_WEEKLY, weekly[0]);
+                                    i.putExtra(ZodiacResultActivity.EXTRA_MONTHLY, "");
+                                    i.putExtra(ZodiacResultActivity.EXTRA_YEARLY, "");
+                                    startActivity(i);
+                                });
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        runOnUiThread(() -> {
+                            trigger.setEnabled(true);
+                            trigger.setText("Interpret");
+                            Intent i = new Intent(ChatReaderActivity.this, ZodiacResultActivity.class);
+                            i.putExtra(ZodiacResultActivity.EXTRA_ZODIAC, selectedZodiac);
+                            i.putExtra(ZodiacResultActivity.EXTRA_DATE_RANGE, selectedDateRange);
+                            i.putExtra(ZodiacResultActivity.EXTRA_DAILY, daily[0]);
+                            i.putExtra(ZodiacResultActivity.EXTRA_WEEKLY, "");
+                            i.putExtra(ZodiacResultActivity.EXTRA_MONTHLY, "");
+                            i.putExtra(ZodiacResultActivity.EXTRA_YEARLY, "");
+                            startActivity(i);
+                        });
+                    }
+                });
+            }
+
+            @Override
+            public void onError(String message) {
+                runOnUiThread(() -> {
+                    trigger.setEnabled(true);
+                    trigger.setText("Interpret");
                 });
             }
         });

@@ -11,6 +11,7 @@
     <color name="gold">#FFD700</color>
     <color name="cyan">#00BCD4</color>
     <color name="notification_red">#FF4444</color>
+    <color name="_9c86b8">#9C86B8</color>
     <!-- Theme-aware aliases -->
     <color name="app_background">@color/white</color>
     <color name="app_text_primary">@color/black</color>

@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 public class ZodiacResultActivity extends AppCompatActivity {
     public static final String EXTRA_ZODIAC = "extra_zodiac";
+    public static final String EXTRA_DATE_RANGE = "extra_date_range";
     public static final String EXTRA_DAILY = "extra_daily";
     public static final String EXTRA_WEEKLY = "extra_weekly";
     public static final String EXTRA_MONTHLY = "extra_monthly";
@@ -31,16 +32,24 @@ public class ZodiacResultActivity extends AppCompatActivity {
         ViewPager2 viewPager = findViewById(R.id.viewPager);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
 
+        // Header binding
+        android.widget.TextView tvZodiacName = findViewById(R.id.tvZodiacName);
+        android.widget.TextView tvDateRange = findViewById(R.id.tvDateRange);
+        String zodiac = getIntent().getStringExtra(EXTRA_ZODIAC);
+        String dateRange = getIntent().getStringExtra(EXTRA_DATE_RANGE);
+        if (tvZodiacName != null) tvZodiacName.setText(zodiac != null ? zodiac : "");
+        if (tvDateRange != null) tvDateRange.setText(dateRange != null ? dateRange : "");
+
         ZodiacResultPagerAdapter adapter = new ZodiacResultPagerAdapter(this,
                 daily, weekly, monthly, yearly);
         viewPager.setAdapter(adapter);
 
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
-                case 0: tab.setText("Today"); break;
-                case 1: tab.setText("Weekly"); break;
-                case 2: tab.setText("Monthly"); break;
-                case 3: tab.setText("Yearly"); break;
+                case 0: tab.setText("Hôm nay"); break;
+                case 1: tab.setText("Tuần này"); break;
+                case 2: tab.setText("Tháng này"); break;
+                case 3: tab.setText("Năm nay"); break;
             }
         }).attach();
     }

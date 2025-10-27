@@ -1,11 +1,9 @@
 package com.example.secret;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,23 +27,13 @@ public class ZodiacSummaryFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_zodiac_summary, container, false);
-        TextView tvTitle = v.findViewById(R.id.tvTitle);
         TextView tvSummary = v.findViewById(R.id.tvSummary);
-        Button btnDetail = v.findViewById(R.id.btnDetail);
 
         Bundle args = getArguments();
         final String title = args != null ? args.getString(ARG_TITLE, "") : "";
         final String text = args != null ? args.getString(ARG_TEXT, "") : "";
 
-        tvTitle.setText(title);
         tvSummary.setText(text);
-
-        btnDetail.setOnClickListener(v1 -> {
-            Intent i = new Intent(requireContext(), ZodiacDetailActivity.class);
-            i.putExtra(ZodiacDetailActivity.EXTRA_TITLE, title);
-            i.putExtra(ZodiacDetailActivity.EXTRA_TEXT, text);
-            startActivity(i);
-        });
 
         return v;
     }

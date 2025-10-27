@@ -27,10 +27,10 @@ public class ZodiacResultPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0: return ZodiacSummaryFragment.newInstance("Today", daily);
-            case 1: return ZodiacSummaryFragment.newInstance("Weekly", weekly);
-            case 2: return ZodiacSummaryFragment.newInstance("Monthly", monthly);
-            default: return ZodiacSummaryFragment.newInstance("Yearly", yearly);
+            case 0: return ZodiacSummaryFragment.newInstance("Hôm nay", daily);
+            case 1: return ZodiacSummaryFragment.newInstance("Tuần này", weekly);
+            case 2: return ZodiacSummaryFragment.newInstance("Tháng này", monthly);
+            default: return ZodiacSummaryFragment.newInstance("Năm nay", yearly);
         }
     }
 

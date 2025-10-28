@@ -44,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, ChatReaderActivity.class);
             startActivity(i);
         });
-        findViewById(R.id.cardDailyCard).setOnClickListener(v -> openFeature("Daily Card"));
+        findViewById(R.id.cardDailyCard).setOnClickListener(v -> {
+            Intent i = new Intent(this, NumerologyDateActivity.class);
+            startActivity(i);
+        });
         findViewById(R.id.cardYesOrNo).setOnClickListener(v -> openFeature("Yes or No"));
 
         // Spin wheel button

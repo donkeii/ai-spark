@@ -54,6 +54,21 @@
             android:exported="false"
             android:theme="@style/AppTheme.WithActionBar"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NumerologyDateActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".NumerologyNameActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".NumerologyDateActivity" />
+        <activity
+            android:name=".NumerologyResultActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.WithActionBar"
+            android:parentActivityName=".NumerologyNameActivity" />
     </application>
 
 </manifest>

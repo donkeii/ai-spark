@@ -25,9 +25,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * This hits the Generative Language API's text model endpoint.
  */
 public class GeminiClient {
-    // Use the alias "-latest" to avoid 404 on deprecated versions
-    private static final String BASE_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-pro:generateContent?key=";
-    private static final String ALT_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=";
+    private static final String BASE_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
     private final OkHttpClient httpClient;
@@ -108,9 +106,7 @@ public class GeminiClient {
                             if (retryAfter != null) {
                                 try { delay = Math.max(delay, Long.parseLong(retryAfter) * 1000L); } catch (Exception ignored) {}
                             }
-                            // First retry: try fallback lighter model
-                            String nextUrl = (attempt == 0) ? ALT_URL : baseUrl;
-                            scheduler.schedule(() -> enqueueRequestWithRetry(body, nextUrl, attempt + 1, cb), delay, TimeUnit.MILLISECONDS);
+                            scheduler.schedule(() -> enqueueRequestWithRetry(body, baseUrl, attempt + 1, cb), delay, TimeUnit.MILLISECONDS);
                             return;
                         }
                         cb.onError(finalMsg);
